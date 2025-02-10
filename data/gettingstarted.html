@@ -42,6 +42,11 @@
           <i class="material-icons">&#xE8D9;</i> &zwnj;Browser Ballot&zwnj;
         </a>
       </div>
+      <div class="normal-session-only">
+        <a class="btn btn-inverse index-btn" onclick='changePage("emailclients")'>
+          <i class="material-icons">&#xe158;</i> &zwnj;Email Ballot&zwnj;
+        </a>
+      </div>
       <a class="btn btn-inverse index-btn" onclick='changePage("customize")'>
         <i class="material-icons">&#xE8A4;</i> &zwnj;Customization&zwnj;
       </a>
@@ -793,11 +798,7 @@
               class="material-icons">&#xE2C0;</span><span class="button-text">&zwnj;Install & Configure Flatpak&zwnj;</span>&nbsp;</a>
             <div id="flatpak-remove" class="alert alert-success"> <i class="material-icons">&#xE876;</i>&zwnj;Flatpak is installed.&zwnj;</div>
             <p id="flatpak-instruction" class="hidden"><small>&zwnj;Please reboot for the service to start.&zwnj;</small></p>
-            <span id="flatpak-hint" class="center"><small>
-                <p>&zwnj;Being a user friendly distribution, Ubuntu Budgie allows you to install Flatpak with a single click. 
-                  After setup, you can use <strong>Software</strong> to install Flatpak applications.&zwnj;
-                </p>
-              </small></span>
+            
           </div>
         </div>
         <hr class="soften-light">
@@ -859,7 +860,7 @@
       <div id="browsers" class="topicContents">
         &zwnj;To improve the amount of customizability, Ubuntu Budgie allows you to install/remove
         popular
-        web browsers with a single click.&zwnj;
+        web browsers.&zwnj;
         <div class="row text-md-center">
           <div class="col-md-6 application border rounded">
             <h4>&zwnj;Firefox&zwnj;</h4>
@@ -896,6 +897,22 @@
               </span>
           </div>
           <div class="col-md-6 application border rounded">
+            <h4>Mozilla Firefox</h4>
+            <img src="img/applications/firefox.svg" />
+            <p class="text-md-justify">&zwnj;Mozilla Firefox is a free and open-source web browser, developed
+              by the Mozilla Foundation - a not for profit organization. This is the stable release browser made available directly by Mozilla thru their own repository.&zwnj;</p>
+              <a id="mozillafirefox-install" class="btn btn-success" onclick="cmd('install?mozillafirefox');">
+                <span class="material-icons">&#xE2C0;</span><span class="button-text">&zwnj;Install&zwnj;</span>
+              </a>
+              <a id="mozillafirefox-remove" class="btn btn-danger" onclick="cmd('remove?mozillafirefox');">
+                <span class="material-icons">&#xE872;</span><span class="button-text">&zwnj;Remove&zwnj;</span>
+              </a>
+              <p id="mozillafirefox-instruction"><small>&zwnj;Click Remove first to uninstall the current firefox package, followed by Install to add the Mozilla repository and package.&zwnj;</small></p>
+              <span id="mozillafirefox-status" class="hidden">
+                <img src="img/welcome/processing.gif" style="width:24px" /> &zwnj;Applying Changes...&zwnj;
+              </span>
+          </div>
+          <div class="col-md-6 application border rounded">
             <h4>Chromium</h4>
             <img src="img/applications/chromium.svg" />
             <p class="text-md-justify">&zwnj;Chromium is an open-source browser project that aims to build a safer,
@@ -915,44 +932,23 @@
             <img src="img/applications/chrome.png" />
             <p class="text-md-justify">&zwnj;Google Chrome is a modern web browser backed by internet giant Google. It
               offers a smooth browsing experience plus integration with Google's proprietary services.&zwnj;</p>
-            <a id="chrome-install" class="btn btn-success" onclick="cmd('install?chrome');">
-              <span class="material-icons">&#xE2C0;</span><span class="button-text">&zwnj;Install&zwnj;</span>
-            </a>
-            <a id="chrome-remove" class="btn btn-danger" onclick="cmd('remove?chrome');">
-              <span class="material-icons">&#xE872;</span><span class="button-text">&zwnj;Remove&zwnj;</span>
-            </a>
-            <span id="chrome-status" class="hidden">
-              <img src="img/welcome/processing.gif" style="width:24px" /> &zwnj;Applying Changes...&zwnj;
-            </span>
+              <a onclick="cmd('link?https://www.google.com/intl/en_uk/chrome/')" class="btn btn-inverse">
+                &zwnj;Downloads Page&zwnj;</a>
           </div>
           <div class="col-md-6 application border rounded edge-arch">
             <h4>Microsoft Edge</h4>
             <img src="img/applications/edge.svg" />
             <p class="text-md-justify">&zwnj;Microsoft Edge is a cross-platform web browser created and developed by Microsoft. It is a Chromium based browser.&zwnj;</p>
-            <a id="edge-install" class="btn btn-success" onclick="cmd('install?edge');">
-              <span class="material-icons">&#xE2C0;</span><span class="button-text">&zwnj;Install&zwnj;</span>
-            </a>
-            <a id="edge-remove" class="btn btn-danger" onclick="cmd('remove?edge');">
-              <span class="material-icons">&#xE872;</span><span class="button-text">&zwnj;Remove&zwnj;</span>
-            </a>
-            <span id="edge-status" class="hidden">
-              <img src="img/welcome/processing.gif" style="width:24px" /> &zwnj;Applying Changes...&zwnj;
-            </span>
+              <a onclick="cmd('link?https://www.microsoft.com/en-us/edge/business/download?form=MA13FJ')" class="btn btn-inverse">
+                &zwnj;Downloads Page&zwnj;</a>
           </div>
           <div class="col-md-6 application border rounded vivaldi-arch">
             <h4>Vivaldi</h4>
             <img src="img/applications/vivaldi.png" />
             <p class="text-md-justify">&zwnj;Vivaldi Web Browser is a free, fully customizable web browser.
               Feature rich, powerful, secure and fun! Browse the Web your way&zwnj;</p>
-            <a id="vivaldi-install" class="btn btn-success" onclick="cmd('install?vivaldi');">
-              <span class="material-icons">&#xE2C0;</span><span class="button-text">&zwnj;Install&zwnj;</span>
-            </a>
-            <a id="vivaldi-remove" class="btn btn-danger" onclick="cmd('remove?vivaldi');">
-              <span class="material-icons">&#xE872;</span><span class="button-text">&zwnj;Remove&zwnj;</span>
-            </a>
-            <span id="vivaldi-status" class="hidden">
-              <img src="img/welcome/processing.gif" style="width:24px" /> &zwnj;Applying Changes...&zwnj;
-            </span>
+              <a onclick="cmd('link?https://vivaldi.com/download/')" class="btn btn-inverse">
+                &zwnj;Downloads Page&zwnj;</a>
           </div>
 
           <div class="col-md-6 application push-md-3 border rounded opera-arch">
@@ -1032,6 +1028,101 @@
               <span class="material-icons">&#xE872;</span><span class="button-text">&zwnj;Remove&zwnj;</span>
             </a>
             <span id="gnomeweb-status" class="hidden">
+              <img src="img/welcome/processing.gif" style="width:24px" /> &zwnj;Applying Changes...&zwnj;
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- Email Ballot -->
+      <div id="emailclients" class="topicContents">
+        &zwnj;To improve the amount of customizability, Ubuntu Budgie allows you to install/remove
+        popular
+        email clients.&zwnj;
+        <div class="row text-md-center">
+          <div class="col-md-6 application border rounded">
+            <h4><a onclick="cmd('link?https://bugzilla.mozilla.org/enter_bug.cgi?product=Thunderbird')"><span class="material-icons">help</span></a>&zwnj;Thunderbird&zwnj;</h4>
+            <img src="img/logos/Thunderbird_icon.svg" />
+            <p class="text-md-justify">&zwnj;Access all your messages, calendars, and contacts in one fast app. Filter and organize the way you like. Manage all accounts separately or in a unified inbox. Thunderbird simply makes your life simpler.&zwnj;</p>
+            <div class="thunderbird-snap-arch">
+              <p></p>
+              <a id="thunderbird-snap-install" class="btn btn-success" onclick="cmd('install?thunderbird-snap');">
+                <span class="material-icons">&#xE2C0;</span><span class="button-text">&zwnj;Snap Install&zwnj;</span>
+              </a>
+              <a id="thunderbird-snap-remove" class="btn btn-danger" onclick="cmd('remove?thunderbird-snap');">
+                <span class="material-icons">&#xE872;</span><span class="button-text">&zwnj;Snap Remove&zwnj;</span>
+              </a>
+              <span id="thunderbird-snap-status" class="hidden">
+                <img src="img/welcome/processing.gif" style="width:24px" /> &zwnj;Applying Changes...&zwnj;
+              </span>
+            </div>
+          </div>
+          <div class="col-md-6 application border rounded">
+            <h4><a onclick="cmd('link?https://gitlab.gnome.org/GNOME/evolution/-/issues')"><span class="material-icons">help</span></a>&zwnj;Evolution&zwnj;</h4>
+            <img src="img/logos/Evolution_icon.svg" />
+            <p class="text-md-justify">&zwnj;Evolution is a personal information management application that provides integrated mail, calendaring and address book functionality.&zwnj;</p>
+            <a id="evolution-install" class="btn btn-success" onclick="cmd('install?evolution');">
+              <span class="material-icons">&#xE2C0;</span><span class="button-text">&zwnj;Install&zwnj;</span>
+            </a>
+            <a id="evolution-remove" class="btn btn-danger" onclick="cmd('remove?evolution');">
+              <span class="material-icons">&#xE872;</span><span class="button-text">&zwnj;Remove&zwnj;</span>
+            </a>
+            <span id="evolution-status" class="hidden">
+              <img src="img/welcome/processing.gif" style="width:24px" /> &zwnj;Applying Changes...&zwnj;
+            </span>
+          </div>
+          <div class="col-md-6 application border rounded">
+            <h4><a onclick="cmd('link?https://gitlab.gnome.org/GNOME/geary/issues/')"><span class="material-icons">help</span></a>&zwnj;Geary&zwnj;</h4>
+            <img src="img/logos/Geary_icon.svg" />
+            <p class="text-md-justify">&zwnj;Geary is an email application built around conversations for the GNOME desktop.&zwnj;</p>
+            <a id="geary-install" class="btn btn-success" onclick="cmd('install?geary');">
+              <span class="material-icons">&#xE2C0;</span><span class="button-text">&zwnj;Install&zwnj;</span>
+            </a>
+            <a id="geary-remove" class="btn btn-danger" onclick="cmd('remove?geary');">
+              <span class="material-icons">&#xE872;</span><span class="button-text">&zwnj;Remove&zwnj;</span>
+            </a>
+            <span id="geary-status" class="hidden">
+              <img src="img/welcome/processing.gif" style="width:24px" /> &zwnj;Applying Changes...&zwnj;
+            </span>
+          </div>
+          <div class="col-md-6 application border rounded">
+            <h4><a onclick="cmd('link?https://bugs.kde.org/')"><span class="material-icons">help</span></a>&zwnj;Kontact&zwnj;</h4>
+            <img src="img/logos/Kontact_icon.svg" />
+            <p class="text-md-justify">&zwnj;Handle your email, calendar, contacts and other personal data with Kontact. Kontact groups everything together in one place and helps you manage your communications, organize your day and work with your colleagues. Become more productive with Kontact.&zwnj;</p>
+            <a id="kontact-install" class="btn btn-success" onclick="cmd('install?kontact');">
+              <span class="material-icons">&#xE2C0;</span><span class="button-text">&zwnj;Install&zwnj;</span>
+            </a>
+            <a id="kontact-remove" class="btn btn-danger" onclick="cmd('remove?kontact');">
+              <span class="material-icons">&#xE872;</span><span class="button-text">&zwnj;Remove&zwnj;</span>
+            </a>
+            <span id="kontact-status" class="hidden">
+              <img src="img/welcome/processing.gif" style="width:24px" /> &zwnj;Applying Changes...&zwnj;
+            </span>
+          </div>
+          <div class="col-md-6 application border rounded">
+            <h4><a onclick="cmd('link?https://github.com/astroidmail/astroid')"><span class="material-icons">help</span></a>&zwnj;Astroid&zwnj;</h4>
+            <img src="img/logos/Astroid_icon.svg" />
+            <p class="text-md-justify">&zwnj;Astroid is a lightweight and fast Mail User Agent that provides a graphical interface to searching, display and composing email, organized in thread and tags. Astroid uses the notmuch backend for blazingly fast searches through tons of email. Astroid searches, displays and compose emails — and relies on other programs for fetching, syncing and sending email.&zwnj;</p>
+            <a id="astroid-install" class="btn btn-success" onclick="cmd('install?astroid');">
+              <span class="material-icons">&#xE2C0;</span><span class="button-text">&zwnj;Install&zwnj;</span>
+            </a>
+            <a id="astroid-remove" class="btn btn-danger" onclick="cmd('remove?astroid');">
+              <span class="material-icons">&#xE872;</span><span class="button-text">&zwnj;Remove&zwnj;</span>
+            </a>
+            <span id="astroid-status" class="hidden">
+              <img src="img/welcome/processing.gif" style="width:24px" /> &zwnj;Applying Changes...&zwnj;
+            </span>
+          </div>
+          <div class="col-md-6 application border rounded">
+            <h4><a onclick="cmd('link?https://www.claws-mail.org/bugzilla/index.cgi')"><span class="material-icons">help</span></a>&zwnj;Claws-Mail&zwnj;</h4>
+            <img src="img/logos/claws-mail_icon.png" />
+            <p class="text-md-justify">&zwnj;Claws Mail is an email client (and news reader), based on GTK+, featuring quick response, graceful and sophisticated interface, easy configuration, intuitive operation, abundant features, extensibility, robustness and stability.&zwnj;</p>
+            <a id="claws-install" class="btn btn-success" onclick="cmd('install?claws');">
+              <span class="material-icons">&#xE2C0;</span><span class="button-text">&zwnj;Install&zwnj;</span>
+            </a>
+            <a id="claws-remove" class="btn btn-danger" onclick="cmd('remove?claws');">
+              <span class="material-icons">&#xE872;</span><span class="button-text">&zwnj;Remove&zwnj;</span>
+            </a>
+            <span id="claws-status" class="hidden">
               <img src="img/welcome/processing.gif" style="width:24px" /> &zwnj;Applying Changes...&zwnj;
             </span>
           </div>

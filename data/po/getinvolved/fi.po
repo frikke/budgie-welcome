@@ -1,13 +1,14 @@
 # 
 # Translators:
 # Tux <tuxpingviini@gmail.com>, 2020
+# Tinde (Joke), 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Budgie Welcome\n"
 "POT-Creation-Date: 2016-02-27 12:48+0100\n"
 "PO-Revision-Date: 2017-03-15 13:49+0000\n"
-"Last-Translator: Tux <tuxpingviini@gmail.com>, 2020\n"
+"Last-Translator: Tinde (Joke), 2024\n"
 "Language-Team: Finnish (https://app.transifex.com/ubuntu-budgie/teams/72251/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,6 +32,9 @@ msgid ""
 "are growing at a steady pace and our distribution is getting better every "
 "day thanks to you."
 msgstr ""
+"Ubuntu Budgie saa paljon tukea käyttäjäyhteisöltä ja haluamme kiittää "
+"jokaista osallistujaa osallistumisesta. Kasvamme tasaisessa tahdissa ja "
+"jakelumme paranee joka päivä kiitos."
 
 #: getinvolved.html:19
 msgid ""
@@ -38,6 +42,8 @@ msgid ""
 "availability you can help Ubuntu Budgie in one or more of the following "
 "ways:"
 msgstr ""
+"On erittäin helppoa tehdä ero. Taitojoukostasi riippuen, saatavuutesi voit "
+"auttaa Ubuntu Budgieta yhdessä tai useammassa seuraavista tavoista:"
 
 #: getinvolved.html:23
 msgid "Support &amp; Promotion"
@@ -52,6 +58,8 @@ msgid ""
 "If you like Ubuntu Budgie, let people know. Blog, add comments in forums and"
 " talk about it with your friends and the people around you."
 msgstr ""
+"Jos pidät Ubuntu Budgie, kerro ihmisille. Blogi, lisää kommentteja "
+"foorumeihin ja puhu siitä ystävien ja ympärilläsi olevien ihmisten kanssa."
 
 #: getinvolved.html:27
 msgid "Joining the Community"
@@ -66,6 +74,13 @@ msgid ""
 "recommend you join the community and participate in making Ubuntu Budgie "
 "better."
 msgstr ""
+"Ubuntu Budgie ei ole vain käyttöjärjestelmä, se on myös dynaaminen yhteisö "
+"ihmisiä, jotka nauttivat, keräävät ja ovat vuorovaikutuksessa ilmaisen ja "
+"avoimen projektin kanssa. Olipa kyse siitä, että se on auttamalla muita "
+"selvittämään ongelmat, tekemällä heistä tervetulleita tai yksinkertaisesti "
+"tapaamalla ja puhumalla muiden Ubuntu -budgien käyttäjien kanssa, "
+"suosittelemme liittymään yhteisöön ja osallistumaan Ubuntu -budgien "
+"parantamiseen."
 
 #: getinvolved.html:30
 msgid "Helping others"
@@ -78,6 +93,10 @@ msgid ""
 "joining the community chat-room and helping other Ubuntu Budgie users solve "
 "the problems you know how to fix."
 msgstr ""
+"Jos sinulla on vapaa-aikaa ja olet valmis auttamaan muita käyttäjiä, joilla "
+"on teknisiä ongelmia, sinun tulee vakavasti harkita foorumien lukemista "
+"ja/tai liittymistä yhteisön chat-huoneeseen ja auttaa muita Ubuntu-budgien "
+"käyttäjiä ratkaisemaan ongelmat, jotka tiedät, kuinka korjata."
 
 #: getinvolved.html:35
 msgid "Project contributions"
@@ -94,6 +113,10 @@ msgid ""
 "others as well; The sooner we know about it, the sooner we're able to fix "
 "it."
 msgstr ""
+"Jos olet huomannut jotain, joka ei toimi kunnolla Ubuntu Budgie -sovelluksen"
+" käyttäessä, kerro meille. Löytämäsi ongelma vaikuttaa todennäköisesti myös "
+"muihin; Mitä nopeammin tiedämme siitä, sitä nopeammin pystymme korjaamaan "
+"sen."
 
 #: getinvolved.html:39
 msgid "New ideas"
@@ -108,6 +131,12 @@ msgid ""
 "have any other ideas on how to make Ubuntu Budgie better, we're always "
 "interested in hearing them."
 msgstr ""
+"Suurin osa jokaisessa julkaisussa olevista parannuksista tulee yhteisöstä. "
+"Jos on jotain, jonka luulet puuttuvan tai joka voitaisiin tehdä paremmin, "
+"kerro meille. Olipa kyse puuttuvan ohjelmistosovelluksen sisällyttämisestä, "
+"jonka pitäisi olla osa osakeasennusta tai jos sinulla on muita ideoita "
+"siitä, kuinka Ubuntu Budgie voidaan parantaa, olemme aina kiinnostuneita "
+"kuulemaan ne."
 
 #: getinvolved.html:42
 msgid "Artwork"
@@ -149,6 +178,8 @@ msgid ""
 "Upstream to us is budgie-desktop. Created by BuddiesOfBudgie, they are "
 "looking for developers - so please help if you can."
 msgstr ""
+"Upstream to us is budgie-desktop. Created by BuddiesOfBudgie, they are "
+"looking for developers - so please help if you can."
 
 #: getinvolved.html:51
 msgid ""

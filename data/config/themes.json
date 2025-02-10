@@ -22,9 +22,10 @@
 		"mojave-theme",
 		"whitesur-theme",
 		"orchis-theme",
-		"fluent-theme"
+		"fluent-theme",
+		"colloid-theme"
 	],
-	"kinetic": [
+	"noble": [
 		"pocillo-theme",
 		"arc-theme",
 		"material-vimix-theme",
@@ -33,9 +34,10 @@
 		"mojave-theme",
 		"whitesur-theme",
 		"orchis-theme",
-		"fluent-theme"
+		"fluent-theme",
+		"colloid-theme"
 	],
-	"lunar": [
+	"oracular": [
 		"pocillo-theme",
 		"arc-theme",
 		"material-vimix-theme",
@@ -44,9 +46,10 @@
 		"mojave-theme",
 		"whitesur-theme",
 		"orchis-theme",
-		"fluent-theme"
+		"fluent-theme",
+		"colloid-theme"
 	],
-	"mantic": [
+	"plucky": [
 		"pocillo-theme",
 		"arc-theme",
 		"material-vimix-theme",
@@ -55,6 +58,7 @@
 		"mojave-theme",
 		"whitesur-theme",
 		"orchis-theme",
-		"fluent-theme"
+		"fluent-theme",
+		"colloid-theme"
 	]
 }

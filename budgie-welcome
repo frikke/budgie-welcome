@@ -5,7 +5,7 @@
 # Copyright 2013 "Manjaro Linux" <support@manjaro.org>
 # Copyright 2014 Antergos
 # Copyright 2016 Ubuntu Mate
-# Copyright 2016-2019 Ubuntu Budgie Developers
+# Copyright 2016-2024 Ubuntu Budgie Developers
 #
 # budgie-welcome is free software: you can redistribute it and/or modify
 # it under the temms of the GNU General Public License as published by
@@ -22,14 +22,17 @@
 #
 
 """ Welcome App for Ubuntu Budgie and budgie-remix """
-
 import re
 import apt
 from notify2 import Notification, init as NotifyInit
 from queue import Queue, Empty
 from threading import Thread
 import gi
-gi.require_version('WebKit2', '4.0')
+try:
+    gi.require_version('WebKit2', '4.1')
+except:
+    gi.require_version('WebKit2', '4.0')
+
 from gi.repository import WebKit2, Gtk, Gio, Gdk, GLib
 import getpass
 import gettext
@@ -45,8 +48,6 @@ import subprocess
 import signal
 import os
 import inspect
-import gi
-gi.require_version('WebKit2', '4.0')
 from datetime import datetime
 
 try:
@@ -60,6 +61,8 @@ start_location = "./"  # path defined on app startup
 
 win = None
 
+def versiontuple(v):
+    return tuple(map(int, (v.split("."))))
 
 class AppView(WebKit2.WebView):
 
@@ -74,7 +77,6 @@ class AppView(WebKit2.WebView):
         self.status_btn = None
         self.back_btn = None
         self.page_title = None
-        # self.set_zoom_level(0.90)
 
         self.back_signal_handler = None
 
@@ -245,7 +247,18 @@ class AppView(WebKit2.WebView):
                 config = json.load(file)
 
             for applet in config['budgie-applets']:
-                if systemstate.codename in config['budgie-applets'][applet]['repos']:
+                show_applet=True
+                if "budgie-version" in config['budgie-applets'][applet]:
+                    test_caveat = config['budgie-applets'][applet]['budgie-version']
+
+                    show_applet = eval(test_caveat)
+
+                if 'session-type' in config['budgie-applets'][applet]:
+                    show_applet = systemstate.xdg_session in config['budgie-applets'][applet]['session-type']
+                else:
+                    show_applet = systemstate.xdg_session == 'x11'
+
+                if systemstate.codename in config['budgie-applets'][applet]['repos'] and show_applet:
                     app.update_page("." + applet, 'show')
                 else:
                     app.update_page("." + applet, 'hide')
@@ -324,6 +337,8 @@ class AppView(WebKit2.WebView):
 
         app.run_javascript(
             "$('span[name=\"distro-name\"]').html('{}')".format(systemstate.distroname))
+        app.run_javascript(
+            "$('span[name=\"software-center\"]').html('{}')".format(systemstate.software_center))
 
         # Apply intermediate actions, if any are present
         if current_page in systemstate.intermediate_actions:
@@ -354,7 +369,7 @@ class AppView(WebKit2.WebView):
         # command is executed with another event, it won't be identified
         # as there is no effective title change. Consider links in applets
         # page. Multiple links refers to budgie-extras repository.
-        self.run_javascript("document.title = ''")
+        app.run_javascript("document.title = ''")
 
     def _context_menu_cb(self, webview, menu, event, htr, user_data=None):
         # Disable context menu.
@@ -430,9 +445,15 @@ class AppView(WebKit2.WebView):
 
         elif uri.startswith('install-os'):
             if uri == 'install-os':
-                subprocess.Popen(['sh', '-c', "ubuntu-budgie-installer"])
-                subprocess.Popen(['sudo', 'sh', '-c', "ubiquity gtk_ui"])
-                app.close()
+                if shutil.which('ubuntu-budgie-installer') != None:
+                    #subprocess.Popen(['sh', '-c', "ubuntu-budgie-installer"])
+                    message = _("Open the menu and search for 'Install RELEASE'")
+                    popup = PopupMessage(message, PopupMessage.INFO)
+
+                    popup.showMessage()
+                else:
+                    subprocess.Popen(['sudo', 'sh', '-c', "ubiquity gtk_ui"])
+                    app.close()
 
                 return
 
@@ -474,15 +495,27 @@ class AppView(WebKit2.WebView):
             Thread(target=panelOperation).start()
 
         elif uri == 'software-center':
-            try:
-                subprocess.Popen(['gnome-software'])
-            except Exception as e:
-                message = _("Seems that GNOME Software is not installed. If this problem persists "
-                            "even after installing GNOME Software, please contact us with following "
-                            "error message")
-                popup = PopupMessage(message, PopupMessage.ERROR, str(e))
+            if systemstate.codename in ['jammy', 'mantic']:
+                try:
+                    subprocess.Popen(['gnome-software'])
+                except Exception as e:
+                    message = _("Seems that GNOME Software is not installed. If this problem persists "
+                                "even after installing GNOME Software, please contact us with following "
+                                "error message")
+                    popup = PopupMessage(message, PopupMessage.ERROR, str(e))
 
-                popup.showMessage()
+                    popup.showMessage()
+            else:
+                try:
+                    subprocess.Popen(['snap-store'])
+                except Exception as e:
+                    message = _("Seems that App Center is not installed. If this problem persists "
+                                "even after installing App Center, please contact us with following "
+                                "error message")
+                    popup = PopupMessage(message, PopupMessage.ERROR, str(e))
+
+                    popup.showMessage()
+
 
         elif uri.startswith("makeover?"):
 
@@ -873,21 +906,42 @@ class AppView(WebKit2.WebView):
                 checkrepos = repos[systemstate.codename]
             todo = False
             thirdparty = False
+
             for val in checkrepos:
                 if val[:3] == 'ppa':
                     ppa = val[4:].split('/')
 
                     filename = ppa[0] + "-ubuntu-" + ppa[1] + "-" + \
-                    systemstate.codename + ".list"
+                        systemstate.codename + ".list"
                     filename = '/etc/apt/sources.list.d/' + filename
 
-                    p = subprocess.Popen(['grep', '^deb\ http', filename])
-                    retval = p.wait()
+                    if os.path.isfile(filename):
+                        p = subprocess.Popen(['grep', r'^deb\ http', filename])
+                        retval = p.wait()
 
-                    if retval != 0:
-                        message += "\n" + val
-                        todo = True
-                    thirdparty = True
+                        if retval != 0:
+                            message += "\n" + val
+                            todo = True
+                        thirdparty = True
+
+                    filename = ppa[0] + "-ubuntu-" + ppa[1] + "-" + \
+                        systemstate.codename + ".sources"
+                    filename = '/etc/apt/sources.list.d/' + filename
+
+                    if os.path.isfile(filename):
+                        p = subprocess.Popen(['grep', 'Enabled: no', filename])
+
+                        retval = p.wait()
+
+                        if retval == 0:
+                            message += "\n" + val
+                            todo = True
+
+                        if os.stat(filename).st_size > 1:
+                            thirdparty = True
+                        else:
+                            message += "\n" + val
+                            todo = True
 
                 elif val[:3] == 'deb':
                     message += "\n" + val
@@ -900,11 +954,11 @@ class AppView(WebKit2.WebView):
                 message += "\n\n"
                 message += _("Continue with the installation?")
 
-                messagedialog = Gtk.MessageDialog(None,
-                                                  Gtk.DialogFlags.MODAL,
-                                                  Gtk.MessageType.WARNING,
-                                                  Gtk.ButtonsType.OK_CANCEL,
-                                                  _("Third-Party Repositories"))
+                messagedialog = Gtk.MessageDialog(parent=None,
+                                                  modal=True,
+                                                  message_type=Gtk.MessageType.WARNING,
+                                                  buttons=Gtk.ButtonsType.OK_CANCEL,
+                                                  text=_("Third-Party Repositories"))
                 messagedialog.format_secondary_text(message)
                 ret = messagedialog.run()
                 messagedialog.destroy()
@@ -922,11 +976,11 @@ class AppView(WebKit2.WebView):
                 message += "\n\n"
                 message += _("Continue with the installation?")
 
-                messagedialog = Gtk.MessageDialog(None,
-                                                  Gtk.DialogFlags.MODAL,
-                                                  Gtk.MessageType.WARNING,
-                                                  Gtk.ButtonsType.OK_CANCEL,
-                                                  _("Third-Party Repositories"))
+                messagedialog = Gtk.MessageDialog(parent=None,
+                                                  modal=True,
+                                                  message_type=Gtk.MessageType.WARNING,
+                                                  buttons=Gtk.ButtonsType.OK_CANCEL,
+                                                  text=_("Third-Party Repositories"))
                 messagedialog.format_secondary_text(message)
                 ret = messagedialog.run()
                 messagedialog.destroy()
@@ -1098,11 +1152,25 @@ class PackageManager(Thread):
                             systemstate.codename + ".list"
                     filename = '/etc/apt/sources.list.d/' + filename
 
-                    p = subprocess.Popen(['grep', '^deb\ http', filename])
-                    retval = p.wait()
+                    if os.path.isfile(filename):
+                        p = subprocess.Popen(['grep', r'^deb\ http', filename])
+                        retval = p.wait()
 
-                    if retval == 0:
+                        if retval == 0:
+                            return True
+
+                    filename = ppa[0] + "-ubuntu-" + ppa[1] + "-" + \
+                        release_code + ".sources"
+                    filename = '/etc/apt/sources.list.d/' + filename
+
+                    if os.path.isfile(filename):
                         found = True
+                        p = subprocess.Popen(['grep', 'Enabled: no', filename])
+
+                        retval = p.wait()
+
+                        if retval == 0:
+                            found = False
             else:
                 # if there are no repos we must be dealing with snaps
                 snaps = pdata.getSnap(current_page, code)
@@ -1334,11 +1402,16 @@ class SystemState(object):
         self.updates_subscribed = False
         self.app_version = 'DEV'
         self.budgie_version = 'NA'
+        self.budgie_version_number = ''
         self.bde_version = 'NA'
         self.speed = None
         self.first_run = False
         self.graphics_vendor = 'Unknown'
         self.graphics_grep = 'Unknown'
+        self.scale_factor = 0
+        self.software_center = ''
+        self.session_type = ''
+        self.xdg_session = ''
 
         # Full path to binary
         self._welcome_bin_path = os.path.abspath(
@@ -1351,6 +1424,11 @@ class SystemState(object):
             os.path.join(self._autostart_dir, 'budgie-welcome.desktop'))
         self.autostart = self.autostart_check()
 
+        if arg.simulate_xdg_session:
+            self.xdg_session = arg.simulate_xdg_session
+        else:
+            self.xdg_session = GLib.environ_getenv(GLib.get_environ(), 'XDG_SESSION_TYPE')
+
         # Get current architecture of system.
         # Outputs 'i386', 'amd64', etc - Based on packages instead of kernel (eg. i686, x86_64).
         if arg.simulate_arch:
@@ -1361,6 +1439,8 @@ class SystemState(object):
 
         # Collect distribution info
         self.gatherDistroInfo()
+
+        self.scale_factor = arg.scale_factor
 
         # Determine which type of session we are in.
         if arg.simulate_session:
@@ -1444,6 +1524,11 @@ class SystemState(object):
         else:
             self.distroname = 'budgie-remix'
             self.distro_wordmark = 'budgie-remix-wordmark.svg'
+
+        if self.codename in ['jammy', 'mantic']:
+            self.software_center='GNOME Software'
+        else:
+            self.software_center="App Center"
 
     def autostart_check(self):
         # Ensure our autostart directories exist
@@ -1674,8 +1759,11 @@ class SystemState(object):
                     root_dev = root_partition[:-1]
                 if root_partition[:-3] == "/dev/mmcblk":  # /dev/mmcblkXpY
                     root_dev = root_partition[:-2]
+                if root_partition.find("/dev/nvme") != -1: # dev/nvme type drives
+                    root_dev = root_partition[:-2]
                 else:
                     root_dev = root_partition[:-1]  # Generic
+                    dbg.stdout("generic partition", root_partition )
                 disk_dev_name = root_dev.split('/')[2]
                 dbg.stdout(
                     'Specs', 'Distribution is installed on disk: ' + root_dev, 1, 4)
@@ -1834,13 +1922,14 @@ class SystemState(object):
         app.update_page('#specs-tabs', 'fadeIn', 'fast')
         app.update_page('#specs-basic', 'fadeIn', 'medium')
         app.update_page('#specs-busy-basic', 'fadeOut', 'fast')
-        webkit.run_javascript('setCursorNormal()')
+        app.run_javascript('setCursorNormal()')
 
     def find_app_version(self):
         versions = find_app_version(cache)
         self.app_version = versions[0]
         self.budgie_version = versions[1]
         self.bde_version = versions[2]
+        self.budgie_desktop_version = versions[3]
 
 
 class WelcomeApp(object):
@@ -1891,13 +1980,14 @@ class WelcomeApp(object):
         end_of_support = {  'xenial' : '2018-07-31',
                             'bionic' : '2021-04-22',
                             'focal'  : '2023-04-22',
-                            'jammy'  : '2025-04-22'}
+                            'jammy'  : '2025-04-22',
+                            'noble'  : '2027-04-22'}
 
-        app_code_names = { 'xenial', 'bionic', 'focal', 'groovy', 'hirsute', 'impish', 'jammy', 'kinetic', 'lunar', 'mantic'}
+        app_code_names = { 'xenial', 'bionic', 'focal', 'jammy', 'kinetic', 'lunar', 'mantic', 'noble', 'oracular', 'plucky'}
 
         if systemstate.codename not in app_code_names:
             dialog = Gtk.MessageDialog( parent=self._window,
-                                        flags=0,
+                                        modal=True,
                                         message_type=Gtk.MessageType.INFO,
                                         buttons=Gtk.ButtonsType.OK,
                                         text=_("Budgie Welcome"))
@@ -1914,7 +2004,7 @@ class WelcomeApp(object):
             cdate = datetime.strptime(end_of_support[systemstate.codename], "%Y-%m-%d")
             if datetime.now() >= cdate:
                 dialog = Gtk.MessageDialog( parent=self._window,
-                                            flags=0,
+                                            modal=True,
                                             message_type=Gtk.MessageType.WARNING,
                                             buttons=Gtk.ButtonsType.OK,
                                             text=_("Budgie Welcome"))
@@ -1982,17 +2072,27 @@ class WelcomeApp(object):
 
         # build webkit container
         mv = AppView()
-        width, height, xoffset, yoffset = self._get_resolution()
+        # this needs to be fixed - under wayland we cannot get the primary monitor resolution with this method
+        try:
+            width, height, xoffset, yoffset = self._get_resolution()
 
-        if width >= 1280:
+            if systemstate.scale_factor == 0:
+                if width >= 1280:
+                    w.set_default_size(992, 500)
+                    cmd = 'gsettings get org.gnome.desktop.interface text-scaling-factor'
+                    text_dpi =  subprocess.check_output(["/bin/bash", "-c", cmd]).decode("utf-8")
+                    mv.set_zoom_level(double(text_dpi))
+                elif width <= 900:
+                    w.set_default_size(680, 340)
+                    mv.set_zoom_level(0.68)
+                else:
+                    w.set_default_size(780, 380)
+                    mv.set_zoom_level(0.75)
+            else:
+                w.set_default_size(680, 340)
+                mv.set_zoom_level(systemstate.scale_factor)
+        except:
             w.set_default_size(992, 500)
-            mv.set_zoom_level(0.98)
-        elif width <= 900:
-            w.set_default_size(680, 340)
-            mv.set_zoom_level(0.68)
-        else:
-            w.set_default_size(780, 380)
-            mv.set_zoom_level(0.75)
 
         mv.status_btn = status_btn
         mv.back_btn = back_btn
@@ -2097,7 +2197,7 @@ class WelcomeApp(object):
         """
         Runs a JavaScript script on the page when invoked from run_javascript()
         """
-        self.webkit.run_javascript(script)
+        self.webkit.evaluate_javascript(script, -1, None, None, None, None)
         return GLib.SOURCE_REMOVE
 
     def _check_first_run(self):
@@ -2159,11 +2259,13 @@ class Arguments(object):
         self.simulate_no_connection = False
         self.simulate_force_connection = False
         self.simulate_version = None
+        self.simulate_xdg_session = None
         self.jump_software_page = False
         self.simulate_software_changes = False
         self.graphics_vendor = ''
         self.locale = None
         self.jump_to = None
+        self.scale_factor= 0
 
         for arg in sys.argv:
             if arg == '--help' or arg == '-h':
@@ -2196,8 +2298,11 @@ class Arguments(object):
                 print(
                     '                                -- Options: guest, live, pi, vbox')
                 print(
+                    '  --force-xdg-session=TYPE    Simulate a session type e.g. x11 or wayland')
+                print(
                     '  --jump-to=PAGE               Open a specific page, excluding *.html')
                 print('  --locale=CODE                Locale to use. e.g. fr_FR.')
+                print('  --scale-factor=double      scale-factor to use. e.g. 1.0')
                 print(
                     '  -v, --verbose                Show more details to stdout (for diagnosis).')
                 print('  -V, --version                Version information')
@@ -2207,7 +2312,10 @@ class Arguments(object):
             elif arg == '-V' or arg == '--version':
                 versions = find_app_version()
                 print("Budgie Welcome" + " " + \
-                      versions[0] + "\n" + "Budgie Desktop" + " " + versions[1])
+                      versions[0] + "\n" + "Budgie Desktop Package" + " " + versions[1] + \
+                      "\n" + "Budgie Desktop Environment Package" + " " + versions[2] + \
+                      "\n" + "Budgie Desktop" + " " + versions[3])
+
                 exit()
 
             if arg == '--verbose' or arg == '-v':
@@ -2227,6 +2335,16 @@ class Arguments(object):
                 except:
                     dbg.stdout(
                         'Debug', 'Invalid arguments for "--force-arch"', 0, 1)
+                    exit()
+
+            if arg.startswith('--force-xdg-session'):
+                try:
+                    self.simulate_xdg_session = arg.split('--force-xdg-session=')[1]
+                    dbg.stdout('Debug', 'Simulating xdg-session-type: ' + \
+                                   self.simulate_xdg_session, 0, 0)
+                except:
+                    dbg.stdout(
+                        'Debug', 'Invalid arguments for "--force-xdg-session"', 0, 1)
                     exit()
 
             if arg.startswith('--force-session'):
@@ -2273,7 +2391,7 @@ class Arguments(object):
             if arg == '--dev' or arg == '--debug' or arg == '-d':
                 dbg.stdout('Debug', 'Running in debugging mode.', 0, 0)
                 dbg.verbose_level = 2
-                self.locale = 'null'
+                #self.locale = 'null'
 
             if arg.startswith('--locale='):
                 self.locale = arg.split('--locale=')[1]
@@ -2283,6 +2401,10 @@ class Arguments(object):
                 self.jump_to = arg.split('--jump-to=')[1]
                 dbg.stdout('Debug', 'Opening page: ' + \
                            self.jump_to + '.html', 0, 0)
+
+            if arg.startswith('--scale-factor='):
+                self.scale_factor = float(arg.split('--scale-factor=')[1])
+                dbg.stdout('Debug', 'Setting scale-factor to: ' + str(self.scale_factor), 0, 0)
 
 
 def find_app_version(cache=apt.Cache()):
@@ -2302,6 +2424,11 @@ def find_app_version(cache=apt.Cache()):
             versions.append(os.environ['SNAP_VERSION'])
         else:
             versions.append('NA')
+
+    cmd = "budgie-desktop --version"
+    stream = os.popen(cmd)
+    output = stream.readlines()
+    versions.append(output[0].split(' ')[1])
 
     return versions
 
@@ -2331,21 +2458,33 @@ class Translations(object):
         else:
             self.localized = True
 
-        # Validate all the i18n pages so we have the same structure as the original.
-        page_was_lost = False
-        if not self.pages_dir == data_path:
-            for page in os.listdir(data_path):
-                if page[-5:] == ".html":
-                    if os.path.exists(os.path.join(self.pages_dir, page)):
-                        dbg.stdout("i18n", "Page Verified: " + page, 2, 2)
-                    else:
-                        if page not in self.excluded_pages:
-                            page_was_lost = True
-                            dbg.stdout("i18n", "Page Missing: " + page, 2, 1)
+        def check_pages():
+            # Validate all the i18n pages so we have the same structure as the original.
+            page_was_lost = False
+            if not self.pages_dir == data_path:
+                for page in os.listdir(data_path):
+                    if page[-5:] == ".html":
+                        if os.path.exists(os.path.join(self.pages_dir, page)):
+                            dbg.stdout("i18n", "Page Verified: " + page, 2, 2)
+                        else:
+                            if page not in self.excluded_pages:
+                                page_was_lost = True
+                                dbg.stdout("i18n", "Page Missing: " + page, 2, 1)
+            return page_was_lost
+
+        page_was_lost = check_pages()
+
+        if page_was_lost and "_" in self.locale:
+            dbg.stdout("i18n", "First check of locale contained missing pages, checking primary locale", 1, 1)
+            self.localized = False
+            self.locale = self.locale.split("_")[0]
+            self.pages_dir = self.get_pages_path()
+            page_was_lost = check_pages()
+
         if page_was_lost:
             dbg.stdout(
                 "i18n", "One or more translation pages are missing! Falling back to 'en_US'", 0, 1)
-            self.pages_dir = data_path
+            self.pages_dir = os.path.join(data_path, "en_US")
             self.localized = False
             self.locale = "en"
         else:
@@ -2403,7 +2542,7 @@ class Translations(object):
             self.relative_i18n = False
             dbg.stdout("i18n", "Locale Not Available: " + \
                        self.locale + " (using en_US instead)", 1, 1)
-            return data_path
+            return os.path.join(data_path, "stripped", "en_US")
 
 
 def desktop_files():

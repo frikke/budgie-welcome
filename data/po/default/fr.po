@@ -3,17 +3,16 @@
 # Emmanuel Hermellin <hermellin@lirmm.fr>, 2017
 # Jean-Elie ARGYRE <remy.argyre@gmail.com>, 2017
 # b122b6c7ae15d2de30fcb20b2b87e128_f108328, 2017
-# Téo le Dozo <teo@couaque.fr>, 2017
-# Guillaume Fayard <guillaume2.fayard@wanadoo.fr>, 2018
 # Jean-Charles SPOR <jean-charles.spor@hotmail.fr>, 2020
 # Salim B <salim.boulkour@gmail.com>, 2020
+# Jean Cahuzac, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Budgie Welcome\n"
 "POT-Creation-Date: 2016-02-27 12:48+0100\n"
 "PO-Revision-Date: 2017-03-22 21:33+0000\n"
-"Last-Translator: Salim B <salim.boulkour@gmail.com>, 2020\n"
+"Last-Translator: Jean Cahuzac, 2024\n"
 "Language-Team: French (https://app.transifex.com/ubuntu-budgie/teams/72251/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,13 +23,13 @@ msgstr ""
 
 #: default.html:14
 msgid "Budgie Makeovers & Layouts"
-msgstr ""
+msgstr "Thèmes et dipositions"
 
 #: default.html18, 29
 msgid "Switch Appearance"
 msgstr "Changer d'apparence"
 
-#: default.html21, 501
+#: default.html21, 535
 msgid "Desktop Layout"
 msgstr "Disposition du bureau"
 
@@ -41,88 +40,96 @@ msgid ""
 "(theme, fonts, icons, desktop wallpaper)."
 msgstr ""
 "Il existe plusieurs thèmes supplémentaires pour l'environnement de bureau "
-"Budgie. Budgie Bienvenue vous permet de changer simplement l'apparence de "
-"votre bureau (thème, polices d'écriture, icônes, fond d'écran)."
+"Budgie. \"Budgie Bienvenue\" vous permet de changer simplement l'apparence "
+"de votre bureau (thème, polices d'écriture, icônes, fond d'écran)."
 
-#: default.html45, 80, 114, 148, 182, 216, 253, 287, 323, 358, 394, 431, 467
+#: default.html45, 80, 114, 148, 182, 216, 250, 287, 321, 357, 392, 428, 465,
+#: 501
 msgid "Install"
 msgstr "Installer"
 
-#: default.html51, 58, 85, 92, 119, 126, 153, 160, 187, 194, 221, 228, 258,
-#: 265, 293, 300, 328, 335, 364, 371, 400, 407, 437, 444, 473, 480
+#: default.html51, 58, 85, 92, 119, 126, 153, 160, 187, 194, 221, 228, 255,
+#: 262, 292, 299, 327, 334, 362, 369, 398, 405, 434, 441, 471, 478, 507, 514
 msgid "Apply makeover"
 msgstr "Appliquer les changements"
 
-#: default.html60, 94, 128, 162, 196, 230, 267, 302, 337, 373, 409, 446, 482
+#: default.html60, 94, 128, 162, 196, 230, 264, 301, 336, 371, 407, 443, 480,
+#: 516
 msgid "Apply theme"
 msgstr "Appliquer le thème"
 
-#: default.html61, 95, 129, 163, 197, 231, 268, 303, 338, 374, 410, 447, 483
+#: default.html61, 95, 129, 163, 197, 231, 265, 302, 337, 372, 408, 444, 481,
+#: 517
 msgid "Apply fonts"
-msgstr "Appliquer les polices de caractère"
+msgstr "Appliquer les polices de caractères"
 
-#: default.html62, 96, 130, 164, 198, 232, 269, 304, 339, 375, 411, 448, 484
+#: default.html62, 96, 130, 164, 198, 232, 266, 303, 338, 373, 409, 445, 482,
+#: 518
 msgid "Apply icons"
 msgstr "Appliquer les icônes"
 
-#: default.html63, 97, 131, 165, 199, 233, 270, 305, 340, 376, 412, 449, 485
+#: default.html63, 97, 131, 165, 199, 233, 267, 304, 339, 374, 410, 446, 483,
+#: 519
 msgid "Make desktop changes"
-msgstr "Apporter les modifications au bureau"
+msgstr "Appliquer les modifications du bureau"
 
-#: default.html69, 103, 137, 171, 205, 239, 276, 312, 347, 383, 419, 456, 492,
-#: 525, 545, 565, 585, 605, 625, 645, 665, 683
+#: default.html69, 103, 137, 171, 205, 239, 273, 310, 346, 381, 417, 453, 490,
+#: 526, 559, 579, 599, 619, 639, 659, 679, 699, 717
 msgid "Applying Changes..."
 msgstr "Application des changements..."
 
-#: default.html:245
+#: default.html:279
 msgid "Arc Design"
-msgstr "Thème Arc"
+msgstr "Arc"
 
-#: default.html:281
+#: default.html:315
 msgid "Material Design (Adapta)"
-msgstr "Thème Material (Adapta)"
+msgstr "Material (Adapta)"
 
-#: default.html:317
+#: default.html:351
 msgid "Material Design (Vimix)"
-msgstr "Thème Material (Vimix)"
+msgstr "Material (Vimix)"
 
-#: default.html:352
+#: default.html:386
 msgid "Material Design (Materia)"
-msgstr "Material Design (Materia)"
+msgstr "Material (Materia)"
 
-#: default.html:502
+#: default.html:536
 msgid "Switch the layout of your desktop to suit your workflow."
 msgstr ""
-"Changer la disposition de votre bureau pour aller avec votre flux de "
-"travaux."
+"Changer la disposition de votre bureau pour l'adapter à vos habitudes de "
+"travail."
 
-#: default.html516, 536, 556, 576, 596, 616, 636, 656
+#: default.html550, 570, 590, 610, 630, 650, 670, 690
 msgid "Install layout"
 msgstr "Installer la disposition"
 
-#: default.html520, 540, 560, 580, 600, 620, 640, 660
+#: default.html554, 574, 594, 614, 634, 654, 674, 694
 msgid "Apply layout"
 msgstr "Appliquer la disposition"
 
-#: default.html:676
+#: default.html:710
 msgid "Restore panels"
 msgstr "Restaurer les menus"
 
-#: default.html:677
+#: default.html:711
 msgid ""
 "Lost your panels while playing with Ubuntu Budgie? Unhappy with your changes"
 " to the panel layout? Don't worry. We can help you to restore your panels "
 "with a single click!"
 msgstr ""
+"Vous n'êtes pas satisfait des changements ? Vous avez perdu la configuration"
+" initiale en jouant avec Ubuntu Budgie ? Pas d'inquiétude, vous pouvez la "
+"restaurer en un clic !"
 
-#: default.html:680
+#: default.html:714
 msgid ""
 "This will undo all changes that you have made on any panel and will reset "
 "back to the initial default panel layout configuration."
 msgstr ""
-"Cela va annuler toutes les modifications effectuées sur tous les panels et "
-"va réinitialiser leur configuration à leur état initial."
+"Toutes les modifications seront annulées et la configuration initiale sera "
+"rétablie."
 
-#: default.html:684
+#: default.html:718
 msgid "Reset Budgie Panel"
-msgstr "Réinitialiser le menu Budgie"
+msgstr "Réinitialiser le bureau Budgie"
