@@ -48,5 +48,15 @@
         "ubuntubudgie-layout",
         "chrome-layout",
         "eleven-layout"
+	],
+    "stonking": [
+		"classicubuntubudgie-layout",
+        "cupertino-layout",
+        "redmond-layout",
+        "theone-layout",
+        "traditional-layout",
+        "ubuntubudgie-layout",
+        "chrome-layout",
+        "eleven-layout"
 	]
 }

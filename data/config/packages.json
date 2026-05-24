@@ -29,6 +29,9 @@
         ],
         "resolute": [
           "ppa:ubuntubudgie/backports"
+        ],
+        "stonking": [
+          "ppa:ubuntubudgie/backports"
         ]
       },
       "session-type": [
@@ -63,6 +66,9 @@
       "repos": {
         "resolute": [
           "ppa:ubuntubudgie/backports"
+        ],
+        "stonking": [
+          "ppa:ubuntubudgie/backports"
         ]
       },
       "session-type": [
@@ -85,6 +91,9 @@
           "ppa:ubuntubudgie/backports"
         ],
         "resolute": [
+          "ppa:ubuntubudgie/backports"
+        ],
+        "stonking": [
           "ppa:ubuntubudgie/backports"
         ]
       },
@@ -122,6 +131,9 @@
         ],
         "resolute": [
           "ppa:ubuntubudgie/backports"
+        ],
+        "stonking": [
+          "ppa:ubuntubudgie/backports"
         ]
       },
       "session-type": [
@@ -147,6 +159,9 @@
           "ppa:ubuntubudgie/backports"
         ],
         "resolute": [
+          "ppa:ubuntubudgie/backports"
+        ],
+        "stonking": [
           "ppa:ubuntubudgie/backports"
         ]
       },
@@ -174,6 +189,9 @@
         ],
         "resolute": [
           "ppa:ubuntubudgie/backports"
+        ],
+        "stonking": [
+          "ppa:ubuntubudgie/backports"
         ]
       },
       "session-type": [
@@ -199,6 +217,9 @@
           "ppa:ubuntubudgie/backports"
         ],
         "resolute": [
+          "ppa:ubuntubudgie/backports"
+        ],
+        "stonking": [
           "ppa:ubuntubudgie/backports"
         ]
       },
@@ -264,6 +285,9 @@
         ],
         "resolute": [
           "ppa:ubuntubudgie/backports"
+        ],
+        "stonking": [
+          "ppa:ubuntubudgie/backports"
         ]
       },
       "session-type": [
@@ -308,6 +332,9 @@
           "universe"
         ],
         "resolute": [
+          "universe"
+        ],
+        "stonking": [
           "universe"
         ]
       },
@@ -361,6 +388,9 @@
       "repos": {
         "resolute": [
           "universe"
+        ],
+        "stonking": [
+          "universe"
         ]
       },
       "session-type": [
@@ -397,6 +427,9 @@
       "repos": {
         "resolute": [
           "universe"
+        ],
+        "stonking": [
+          "universe"
         ]
       },
       "session-type": [
@@ -409,6 +442,9 @@
       ],
       "repos": {
         "resolute": [
+          "universe"
+        ],
+        "stonking": [
           "universe"
         ]
       },
@@ -435,6 +471,9 @@
         ],
         "resolute": [
           "universe"
+        ],
+        "stonking": [
+          "universe"
         ]
       },
       "session-type": [
@@ -448,6 +487,9 @@
       ],
       "repos": {
         "resolute": [
+          "universe"
+        ],
+        "stonking": [
           "universe"
         ]
       },
@@ -512,6 +554,9 @@
         ],
         "resolute": [
           "universe"
+        ],
+        "stonking": [
+          "universe"
         ]
       },
       "session-type": [
@@ -537,6 +582,9 @@
           "universe"
         ],
         "resolute": [
+          "universe"
+        ],
+        "stonking": [
           "universe"
         ]
       },
@@ -583,6 +631,9 @@
         ],
         "resolute": [
           "ppa:ubuntubudgie/backports"
+        ],
+        "stonking": [
+          "ppa:ubuntubudgie/backports"
         ]
       },
       "session-type": [
@@ -608,6 +659,9 @@
           "universe"
         ],
         "resolute": [
+          "universe"
+        ],
+        "stonking": [
           "universe"
         ]
       },
@@ -635,6 +689,9 @@
         ],
         "resolute": [
           "universe"
+        ],
+        "stonking": [
+          "universe"
         ]
       },
       "session-type": [
@@ -660,6 +717,9 @@
           "universe"
         ],
         "resolute": [
+          "universe"
+        ],
+        "stonking": [
           "universe"
         ]
       },
@@ -697,6 +757,9 @@
         ],
         "resolute": [
           "universe"
+        ],
+        "stonking": [
+          "universe"
         ]
       },
       "session-type": [
@@ -722,6 +785,9 @@
           "universe"
         ],
         "resolute": [
+          "universe"
+        ],
+        "stonking": [
           "universe"
         ]
       },
@@ -749,6 +815,9 @@
         ],
         "resolute": [
           "ppa:ubuntubudgie/backports"
+        ],
+        "stonking": [
+          "ppa:ubuntubudgie/backports"
         ]
       },
       "session-type": [
@@ -774,6 +843,9 @@
           "ppa:ubuntubudgie/backports"
         ],
         "resolute": [
+          "ppa:ubuntubudgie/backports"
+        ],
+        "stonking": [
           "ppa:ubuntubudgie/backports"
         ]
       },
@@ -801,6 +873,9 @@
         ],
         "resolute": [
           "ppa:ubuntubudgie/backports"
+        ],
+        "stonking": [
+          "ppa:ubuntubudgie/backports"
         ]
       },
       "session-type": [
@@ -827,6 +902,9 @@
         ],
         "resolute": [
           "universe"
+        ],
+        "stonking": [
+          "universe"
         ]
       },
       "session-type": [
@@ -852,6 +930,9 @@
           "universe"
         ],
         "resolute": [
+          "universe"
+        ],
+        "stonking": [
           "universe"
         ]
       },
@@ -927,6 +1008,9 @@
         ],
         "resolute": [
           "universe"
+        ],
+        "stonking": [
+          "universe"
         ]
       },
       "session-type": [
@@ -952,6 +1036,9 @@
           "universe"
         ],
         "resolute": [
+          "universe"
+        ],
+        "stonking": [
           "universe"
         ]
       },
@@ -998,6 +1085,9 @@
         ],
         "resolute": [
           "universe"
+        ],
+        "stonking": [
+          "universe"
         ]
       },
       "session-type": [
@@ -1023,6 +1113,9 @@
           "ppa:ubuntubudgie/backports"
         ],
         "resolute": [
+          "ppa:ubuntubudgie/backports"
+        ],
+        "stonking": [
           "ppa:ubuntubudgie/backports"
         ]
       },
@@ -1064,6 +1157,21 @@
         ]
       }
     },
+    "ubuntubudgie-layout#stonking": {
+      "packages": [
+        "budgie-applications-menu-applet",
+        "budgie-indicator-applet",
+        "budgie-dropby-applet",
+        "budgie-network-manager-applet",
+        "budgie-showtime-widget",
+        "budgie-quicknote-applet"
+      ],
+      "repos": {
+        "all": [
+          "universe"
+        ]
+      }
+    },
     "classicubuntubudgie-layout": {
       "packages": [
         "budgie-indicator-applet",
@@ -1078,6 +1186,19 @@
       }
     },
     "classicubuntubudgie-layout#resolute": {
+      "packages": [
+        "budgie-indicator-applet",
+        "budgie-dropby-applet",
+        "budgie-showtime-widget",
+        "budgie-quicknote-applet"
+      ],
+      "repos": {
+        "all": [
+          "universe"
+        ]
+      }
+    },
+    "classicubuntubudgie-layout#stonking": {
       "packages": [
         "budgie-indicator-applet",
         "budgie-dropby-applet",
@@ -1584,7 +1705,7 @@
       "key-commands": [
         "wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc",
         "echo \"deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main\" | sudo tee -a /etc/apt/sources.list.d/mozilla.list",
-        "echo '\nPackage: *\nPin: origin packages.mozilla.org\nPin-Priority: 1000\n' | sudo tee /etc/apt/preferences.d/mozilla "
+        "echo '\\nPackage: *\\nPin: origin packages.mozilla.org\\nPin-Priority: 1000\\n' | sudo tee /etc/apt/preferences.d/mozilla "
       ],
       "removekey-commands": [
         "rm -f /etc/apt/keyrings/packages.mozilla.org.asc",

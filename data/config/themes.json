@@ -53,5 +53,12 @@
 		"qogirbudgie-theme",
 		"colloid-theme",
 		"fluent-theme"
+	],
+	"stonking": [
+		"pocillo-theme",
+		"arc-theme",
+		"qogirbudgie-theme",
+		"colloid-theme",
+		"fluent-theme"
 	]
 }
