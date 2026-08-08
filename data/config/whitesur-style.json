@@ -59,9 +59,9 @@
     {
       "SCHEMA": "org.gnome.desktop.interface",
       "VALUES": {
-        "cursor-theme": "DMZ-White",
+        "cursor-theme": "breeze_cursors",
         "gtk-theme": "WhiteSur-Dark",
-        "icon-theme": "WhiteSur-Dark",
+        "icon-theme": "WhiteSur-dark",
         "monospace-font-name": "Ubuntu Mono 13",
         "font-name": "Roboto Regular 11",
         "document-font-name": "Roboto Regular 11"
