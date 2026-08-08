@@ -311,11 +311,11 @@ msgstr "Giny d'escriptori Showtime"
 
 #: budgie-applets.html:669
 msgid "Radio Browser Widget"
-msgstr ""
+msgstr "Giny del navegador de ràdio"
 
 #: budgie-applets.html:674
 msgid "Browse and play from thousands of radio stations."
-msgstr ""
+msgstr "Navegueu i reproduïu milers d'emissores de ràdio."
 
 #: budgie-applets.html:692
 msgid "Screencast Applet"

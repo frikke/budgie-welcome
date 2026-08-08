@@ -304,11 +304,11 @@ msgstr "Desktop Showtime"
 
 #: budgie-applets.html:669
 msgid "Radio Browser Widget"
-msgstr ""
+msgstr "Radio Browser Widget"
 
 #: budgie-applets.html:674
 msgid "Browse and play from thousands of radio stations."
-msgstr ""
+msgstr "Parcourez et écoutez des milliers de stations de radio."
 
 #: budgie-applets.html:692
 msgid "Screencast Applet"
